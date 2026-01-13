@@ -1,19 +1,240 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const businessName = "One Handy Katie";
+const serviceArea = "Serving the Northern Colorado and Front Range Area";
+const phone = "(970) 302-8294"; //update as needed
 ---
 
 <BaseLayout
-  title="One Handy Katie | Handywoman & Project Management"
-  description="Handywoman and construction project management services. Quality repairs, refreshes, and coordination—serving the local area."
+  title={`${businessName} | Fix. Advise. Manage.`}
+  description="From small home repairs and upgrades to large scale construction project management, One Handy Katie provides reliable, professional services with clear communication and attention to detail."
 >
-  <section class="section">
-    <h1>Handywoman & Project Management</h1>
-    <p>
-      Reliable home repairs, upgrades, and project coordination. Tell me what you’re working on and I’ll help you get it done right.
-    </p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">{serviceArea}</p>
+        <h1>Fix. Advise. Manage.</h1>
+        <p class="lead">
+          Handywoman services, home repair assessment, & construction project management
+        </p>
 
-    <p>
-      <a class="button" href="/contact">Request an Estimate</a>
+        <div class="actions">
+          <a class="button primary" href="/contact">Request an Estimate</a>
+          <a class="button" href="/services">View Services</a>
+        </div>
+
+        <p class="micro">
+          Prefer to talk or text? <a href={`tel:${phone.replace(/[^\d+]/g, "")}`}>Call {phone}</a>
+        </p>
+      </div>
+
+      <div class="hero-card" aria-label="Quick highlights">
+        <h2>How I can help</h2>
+        <ul class="checklist">
+          <li>Small repairs and punch lists</li>
+          <li>Refresh projects (paint, trim, fixtures)</li>
+          <li>Project planning, scheduling, and contractor coordination</li>
+          <li>Clear timelines, budget management, and regular updates</li>
+        </ul>
+
+        <div class="trust">
+          <div class="trust-item">
+            <strong>Experience you can trust</strong>
+            <span>20 years of construction project management experience, including medical grade construction.</span>
+          </div>
+          <div class="trust-item">
+            <strong>Quality you can appreciate</strong>
+            <span>Code & Standards compliance, quality materials, and the right tools for the job.</span>
+          </div>
+          <div class="trust-item">
+            <strong>Value</strong>
+            <span>Competitive pricing, smart sourcing, and attention to your budget.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Popular services</h2>
+      <p class="muted">A few common requests. See the full list for more.</p>
+    </div>
+
+    <div class="cards">
+      <a class="card" href="/services">
+        <h3>Drywall repair</h3>
+        <p class="muted">Patches, cracks, holes, texture touch-ups.</p>
+      </a>
+
+      <a class="card" href="/services">
+        <h3>Interior painting</h3>
+        <p class="muted">Single rooms, accent walls, trim refresh.</p>
+      </a>
+
+      <a class="card" href="/services">
+        <h3>Fixture installation</h3>
+        <p class="muted">Lights, fans, hardware, shelves, and more.</p>
+      </a>
+
+      <a class="card" href="/services">
+        <h3>Project management</h3>
+        <p class="muted">Planning, scheduling, and contractor coordination.</p>
+      </a>
+    </div>
+
+    <p style="margin-top: 1.25rem;">
+      <a class="button" href="/services">Explore services</a>
     </p>
   </section>
+
+  <!-- PROCESS -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Simple process</h2>
+      <p class="muted">Clear steps, no surprises.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <strong>Tell me about the project</strong>
+        <p class="muted">Send photos, goals, and your timeline.</p>
+      </li>
+      <li>
+        <strong>Scope and estimate</strong>
+        <p class="muted">We confirm details and set expectations.</p>
+      </li>
+      <li>
+        <strong>Schedule and complete</strong>
+        <p class="muted">Quality work, tidy finish, and updates.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="cta-inner">
+      <div>
+        <h2>Ready to get started?</h2>
+        <p class="muted">Request an estimate and I’ll follow up with next steps.</p>
+      </div>
+      <a class="button primary" href="/contact">Request an Estimate</a>
+    </div>
+  </section>
+
+  <style>
+    /* HERO */
+    .hero { padding: 2rem 0 1rem; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .eyebrow { opacity: 0.8; margin: 0 0 0.5rem; }
+    h1 { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1; margin: 0 0 0.75rem; }
+    .lead { font-size: 1.1rem; opacity: 0.9; max-width: 52ch; }
+
+    .actions { display: flex; gap: 0.75rem; margin: 1.25rem 0 0.5rem; flex-wrap: wrap; }
+    .micro { font-size: 0.95rem; opacity: 0.85; margin-top: 0.5rem; }
+
+    .hero-card {
+      border: 1px solid #eee;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      background: #fafafa;
+    }
+    .hero-card h2 { margin: 0 0 0.75rem; font-size: 1.1rem; }
+    .checklist { margin: 0; padding-left: 1.2rem; }
+    .checklist li { margin: 0.5rem 0; }
+
+    .trust {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eaeaea;
+    }
+    .trust-item span { display: block; font-size: 0.95rem; opacity: 0.8; margin-top: 0.15rem; }
+
+    /* SECTION HEAD + CARDS */
+    .section-head { margin-bottom: 1rem; }
+    .section-head h2 { margin: 0 0 0.35rem; }
+    .muted { opacity: 0.8; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .card {
+      border: 1px solid #eee;
+      border-radius: 1rem;
+      padding: 1rem;
+      background: white;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+    .card:hover {
+      text-decoration: none;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .card h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+
+    /* STEPS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      counter-reset: step;
+    }
+    .steps li {
+      border: 1px solid #eee;
+      border-radius: 1rem;
+      padding: 1rem;
+      background: white;
+    }
+    .steps li strong { display: block; margin-bottom: 0.35rem; }
+
+    /* CTA BAND */
+    .cta-band {
+      margin: 2rem 0 3rem;
+      padding: 1.5rem 0;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      background: #fafafa;
+    }
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    /* Buttons */
+    :global(.button.primary) {
+      background: #111;
+      color: white;
+      border-color: #111;
+    }
+    :global(.button.primary:hover) { opacity: 0.92; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .steps { grid-template-columns: 1fr; }
+      .cta-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 520px) {
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
 </BaseLayout>
