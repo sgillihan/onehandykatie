@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>One Handy Katie</strong>
+      <p class="muted">Handywoman & Construction Project Management</p>
+    </div>
+
+    <div>
+      <strong>Service Area</strong>
+      <p class="muted">Serving the local area (update with city/region).</p>
+    </div>
+
+    <div>
+      <strong>Contact</strong>
+      <p class="muted">
+        <a href="/contact">Request an estimate</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="container copyright">
+    <p class="muted">© {new Date().getFullYear()} One Handy Katie. All rights reserved.</p>
+  </div>
+
+  <style>
+    .site-footer {
+      border-top: 1px solid #eee;
+      margin-top: 3rem;
+      padding: 2rem 0;
+      background: #fafafa;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+    .muted { opacity: 0.8; margin: 0.5rem 0 0; }
+    .copyright { margin-top: 1.25rem; }
+    @media (max-width: 800px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</footer>
