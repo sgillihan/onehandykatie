@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const businessName = "One Handy Katie";
+const city = "Greeley, CO and Front Range area"; // replace later
+---
+
+<BaseLayout
+  title={`Home Repairs in ${city} | ${businessName}`}
+  description={`Home repairs and handyman services in ${city}: fixing leaks, replacing fixtures, electrical work, and more.`}
+>
+  <section class="section">
+    <h1>Home Repairs and handyman services in {city}</h1>
+    <p class="muted">
+      Fixing leaks, replacing fixtures, electrical work, and more.
+    </p>
+
+    <p style="margin-top: 1.25rem;">
+      <a class="button primary" href="/contact">Request an estimate</a>
+    </p>
+  </section>
+</BaseLayout>

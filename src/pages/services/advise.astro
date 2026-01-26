@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const businessName = "One Handy Katie";
+const city = "Greeley, CO and Front Range area"; // replace later
+---
+
+<BaseLayout
+  title={`Home Repairs and Home Project Avising in ${city} | ${businessName}`}
+  description={`home repair and home project advice in ${city}: Assess the scope of your problem or project, and determine a path forward.`}
+>
+  <section class="section">
+    <h1>Project management in {city}</h1>
+    <p class="muted">
+      Assess the scope of your problem or project, and determine a path forward.
+    </p>
+
+    <h2>Great fit for</h2>
+    <ul>
+      <li>DIYers who want professional advice</li>
+      <li>Homeowners who are not sure the scope of their problem or project</li>
+    </ul>
+
+    <h2>My process</h2>
+    <ol>
+      <li>Initial consultation call: discuss issues or goals and possible solutions</li>
+      <li>Follow-up: additional phone or in-person consultations as needed.</li>
+      <li>Recommendations: provide a clear path forward for repairs or projects.</li>
+    </ol>
+
+    <p style="margin-top: 1.25rem;">
+      <a class="button primary" href="/contact">Request an estimate</a>
+    </p>
+  </section>
+</BaseLayout>

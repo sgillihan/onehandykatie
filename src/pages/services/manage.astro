@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const businessName = "One Handy Katie";
+const city = "your local area"; // replace later
+---
+
+<BaseLayout
+  title={`Remodel Project Management in ${city} | ${businessName}`}
+  description={`Construction project management in ${city}: planning, scheduling, contractor coordination, and clear communication.`}
+>
+  <section class="section">
+    <h1>Project management in {city}</h1>
+    <p class="muted">
+      Planning, scheduling, and contractor coordination for homeowners who want fewer surprises and clear progress updates.
+    </p>
+
+    <h2>Great fit for</h2>
+    <ul>
+      <li>Small remodels and refresh projects</li>
+      <li>Coordinating multiple trades</li>
+      <li>Homeowners who want help with planning and oversight</li>
+    </ul>
+
+    <h2>My process</h2>
+    <ol>
+      <li>Scope: goals, budget range, constraints</li>
+      <li>Plan: schedule, materials, key decisions</li>
+      <li>Coordinate: trades, check-ins, and updates</li>
+      <li>Closeout: punch list and final walkthrough</li>
+    </ol>
+
+    <p style="margin-top: 1.25rem;">
+      <a class="button primary" href="/contact">Request an estimate</a>
+    </p>
+  </section>
+</BaseLayout>
