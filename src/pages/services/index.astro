@@ -1,24 +1,80 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const businessName = "One Handy Katie";
+const city = "Greeley, CO and Front Range area"; // replace later
 ---
 
 <BaseLayout
-  title="Services | One Handy Katie"
-  description="Handywoman and project management services including repairs, refreshes, and coordination."
+  title={`Home Repairs and Handywoman Services`}
+  description={`Home repairs and handyman services in ${city}: fixing leaks, replacing fixtures, electrical work, and more.`}
 >
   <section class="section">
-    <h1>Services</h1>
-
+    <h1>Home Repairs and handywoman services</h1>
+    <p class="muted">
+      Let Katie handle your home repairs and updates.
+    </p>
+    <h2>Commonly requested services</h2>
     <ul>
-      <li>Drywall repair</li>
-      <li>Interior painting</li>
-      <li>Fixture installation</li>
-      <li>Trim and finish work</li>
-      <li>Small remodel project coordination</li>
+      <li>Smart home services (thermostat, doorbell, smart lighting, etc)</li>
+      <li>Fixture updates</li>
+      <li>Plumbing or structureal leaks</li>
+      <li>Small appliance installations</li>
     </ul>
 
-    <p>
-      Each service will eventually have its own detail page.
+    <p style="margin-top: 1.25rem;">
+      <a class="button primary" href="/contact">Request an estimate</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <h1>Advice on Home Repairs Projects</h1>
+    <p class="muted">
+      Assess the scope of your problem or project, and determine a path forward.
+    </p>
+
+    <h2>Great fit for</h2>
+    <ul>
+      <li>DIYers who want professional advice</li>
+      <li>Homeowners who are not sure the scope of their problem or project</li>
+    </ul>
+
+    <h2>What to expect:</h2>
+    <ol>
+      <li>Initial consultation call: discuss issues or goals and possible solutions</li>
+      <li>Follow-up: additional phone or in-person consultations as needed.</li>
+      <li>Recommendations: provide a clear path forward for repairs or projects.</li>
+    </ol>
+
+    <p style="margin-top: 1.25rem;">
+      <a class="button primary" href="/contact">Request an estimate</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <h1>Project management</h1>
+    <p class="muted">
+      Planning, scheduling, and contractor coordination for homeowners who want fewer surprises and clear progress updates.
+    </p>
+
+    <h2>Great fit for</h2>
+    <ul>
+      <li>Complete remodels and refresh projects</li>
+      <li>Coordinating multiple trades</li>
+      <li>Homeowners who want help with planning and oversight</li>
+      <li>Home restoration after fire or water damage</li>
+    </ul>
+
+    <h2>Process Steps:</h2>
+    <ol>
+      <li>Scope: goals, budget range, constraints</li>
+      <li>Plan: schedule, materials, key decisions</li>
+      <li>Coordinate: trades, check-ins, and updates</li>
+      <li>Closeout: punch list and final walkthrough</li>
+    </ol>
+
+    <p style="margin-top: 1.25rem;">
+      <a class="button primary" href="/contact">Request an estimate</a>
     </p>
   </section>
 </BaseLayout>

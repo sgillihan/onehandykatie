@@ -17,7 +17,7 @@ const phone = "(970) 302-8294"; //update as needed
         <p class="eyebrow">{serviceArea}</p>
         <h1>Fix. Advise. Manage.</h1>
         <p class="lead">
-          Handywoman services, home repair assessment, & construction project management
+          Handywoman services, home repair / project scope assessment, & project management
         </p>
 
         <div class="actions">
@@ -26,17 +26,18 @@ const phone = "(970) 302-8294"; //update as needed
         </div>
 
         <p class="micro">
-          Prefer to talk or text? <a href={`tel:${phone.replace(/[^\d+]/g, "")}`}>Call {phone}</a>
+          Prefer to talk or text? <a href={`tel:${phone.replace(/[^\d+]/g, "")}`}>Contact {phone}</a>
         </p>
       </div>
 
       <div class="hero-card" aria-label="Quick highlights">
         <h2>How I can help</h2>
         <ul class="checklist">
-          <li>Small repairs and punch lists</li>
-          <li>Refresh projects (paint, trim, fixtures)</li>
-          <li>Project planning, scheduling, and contractor coordination</li>
-          <li>Clear timelines, budget management, and regular updates</li>
+          <ul>
+          <li><a href="/services/">Fix- take care of home repairs and other handywoman tasks</a></li>
+          <li><a href="/services/">Advise- advise you on your home problem or project</a></li>
+          <li><a href="/services/">Manage- provide full project management services for larger projects</a></li>
+          </ul>
         </ul>
 
         <div class="trust">
@@ -60,36 +61,28 @@ const phone = "(970) 302-8294"; //update as needed
   <!-- SERVICES PREVIEW -->
   <section class="section">
     <div class="section-head">
-      <h2>Popular services</h2>
-      <p class="muted">A few common requests. See the full list for more.</p>
+      <h2>Services</h2>
+      <p class="muted">Services offered. Click a link for details.</p>
     </div>
 
     <div class="cards">
       <a class="card" href="/services">
-        <h3>Drywall repair</h3>
-        <p class="muted">Patches, cracks, holes, texture touch-ups.</p>
+        <h3>Fix</h3>
+        <p class="muted">Fixing leaks, replacing fixtures, electrical work, and more.</p>
       </a>
 
       <a class="card" href="/services">
-        <h3>Interior painting</h3>
-        <p class="muted">Single rooms, accent walls, trim refresh.</p>
+        <h3>Advise</h3>
+        <p class="muted">Home repair and project advice.</p>
       </a>
 
       <a class="card" href="/services">
-        <h3>Fixture installation</h3>
-        <p class="muted">Lights, fans, hardware, shelves, and more.</p>
-      </a>
-
-      <a class="card" href="/services">
-        <h3>Project management</h3>
+        <h3>Manage</h3>
         <p class="muted">Planning, scheduling, and contractor coordination.</p>
       </a>
+
     </div>
 
-    <p style="margin-top: 1.25rem;">
-      <a class="button" href="/services">Explore services</a>
-    </p>
-  </section>
 
   <!-- PROCESS -->
   <section class="section">
