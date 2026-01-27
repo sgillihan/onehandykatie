@@ -1,79 +1,40 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sanity } from "../../lib/sanityClient";
+import groq from "groq";
+import { renderPT } from "../../lib/portableText";
 
-const businessName = "One Handy Katie";
-const city = "Greeley, CO and Front Range area"; // replace later
+const data = await sanity.fetch(groq`*[_type == "servicesPage"][0]`);
 ---
 
 <BaseLayout
-  title={`Home Repairs and Project Management. Serving Greeley, Colorado and the Colorado Front Range area. | One Handy Katie`}
-  description={`Home repairs and handyman services in ${city}: fixing leaks, replacing fixtures, electrical work, and more.`}
+  title={`Services | One Handy Katie`}
+  description="Home repairs, project advice, and project management in Greeley, Colorado and the Colorado Front Range."
 >
-  <section id="Fix" class="section">
-    <h1 id="Fix">Home Repairs and Handywoman Services</h1>
-    <p class="muted">
-      Let Katie handle your home repairs and updates.
-    </p>
-    <h2>Commonly requested services</h2>
-    <ul>
-      <li>Smart home services (thermostat, doorbell, smart lighting, etc)</li>
-      <li>Fixture updates</li>
-      <li>External siding or trim repairs</li>
-      <li>Painting</li>
-      <li>Small appliance installations</li>
-    </ul>
+  <section class="section">
+    <h1>{data?.title ?? "Services"}</h1>
+    {data?.intro && <div class="richtext" set:html={renderPT(data.intro)} />}
+  </section>
 
+  <section id="fix" class="section">
+    <h2>{data?.fixTitle ?? "Fix"}</h2>
+    {data?.fixBody && <div class="richtext" set:html={renderPT(data.fixBody)} />}
     <p style="margin-top: 1.25rem;">
       <a class="button primary" href="/contact">Request an estimate</a>
     </p>
   </section>
 
-  <section id="Advise" class="section">
-    <h1 id="Advise">Advice on Home Repair Projects</h1>
-    <p class="muted">
-      Assess the scope of your problem or project, and determine a path forward.
-    </p>
-
-    <h2>Great fit for</h2>
-    <ul>
-      <li>DIYers who want professional advice</li>
-      <li>Homeowners who are not sure the scope of their problem or project</li>
-    </ul>
-
-    <h2>What to expect:</h2>
-    <ol>
-      <li>Initial consultation call: discuss issues or goals and possible solutions</li>
-      <li>Follow-up: additional phone or in-person consultations as needed.</li>
-      <li>Recommendations: provide a clear path forward for repairs or projects.</li>
-    </ol>
-
+  <section id="advise" class="section">
+    <h2>{data?.adviseTitle ?? "Advise"}</h2>
+    {data?.adviseBody && <div class="richtext" set:html={renderPT(data.adviseBody)} />}
     <p style="margin-top: 1.25rem;">
       <a class="button primary" href="/contact">Request an estimate</a>
     </p>
   </section>
 
-  <section id="Manage" class="section">
-    <h1 id="Manage">Project management</h1>
-    <p class="muted">
-      Planning, scheduling, and contractor coordination for homeowners who want fewer surprises and clear progress updates.
-    </p>
-
-    <h2>Great fit for</h2>
-    <ul>
-      <li>Complete remodels and refresh projects</li>
-      <li>Coordinating multiple trades</li>
-      <li>Homeowners who want help with planning and oversight</li>
-      <li>Home restoration after fire or water damage</li>
-    </ul>
-
-    <h2>Process Steps:</h2>
-    <ol>
-      <li>Scope: goals, budget range, constraints</li>
-      <li>Plan: schedule, materials, key decisions</li>
-      <li>Coordinate: trades, check-ins, and updates</li>
-      <li>Closeout: punch list and final walkthrough</li>
-    </ol>
-
+  <section id="manage" class="section">
+    <h2>{data?.manageTitle ?? "Manage"}</h2>
+    {data?.manageBody && <div class="richtext" set:html={renderPT(data.manageBody)} />}
     <p style="margin-top: 1.25rem;">
       <a class="button primary" href="/contact">Request an estimate</a>
     </p>

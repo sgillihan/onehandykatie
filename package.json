@@ -9,6 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.9"
+    "@portabletext/to-html": "^5.0.1",
+    "@sanity/client": "^7.14.1",
+    "astro": "^5.16.9",
+    "groq": "^5.7.0"
   }
 }
