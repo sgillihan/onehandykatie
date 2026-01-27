@@ -14,8 +14,17 @@ const phone = "(970) 302-8294"; //update as needed
   <section class="hero">
     <div class="hero-grid">
       <div>
+        <h1></h1>
+        <img
+          src="/logo/OHK_primary_logo.png"
+          alt="One Handy Katie — Fix. Advise. Manage."
+          class="primary-logo"
+          width="600"
+          height="300"
+          loading="eager"
+          decoding="async"
+        />
         <p class="eyebrow">{serviceArea}</p>
-        <h1>Fix. Advise. Manage.</h1>
         <p class="lead">
           Handywoman services, home repair / project scope assessment, & project management
         </p>
@@ -66,7 +75,7 @@ const phone = "(970) 302-8294"; //update as needed
     <div class="cards">
       <a class="card" href="/services/#Fix">
         <h3>Fix</h3>
-        <p class="muted">Fixing leaks, replacing fixtures, electrical work, and more.</p>
+        <p class="muted">Home repairs, smart home solutions, replacing fixtures, and more.</p>
       </a>
 
       <a class="card" href="/services/#Advise">
@@ -127,6 +136,12 @@ const phone = "(970) 302-8294"; //update as needed
     }
     .eyebrow { opacity: 0.8; margin: 0 0 0.5rem; }
     h1 { font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.1; margin: 0 0 0.75rem; }
+    .primary-logo {
+      max-width: 520px;
+      width: 100%;
+      height: auto;
+      margin: 0 0 1rem;
+    }
     .lead { font-size: 1.1rem; opacity: 0.9; max-width: 52ch; }
 
     .actions { display: flex; gap: 0.75rem; margin: 1.25rem 0 0.5rem; flex-wrap: wrap; }

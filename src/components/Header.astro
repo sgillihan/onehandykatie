@@ -10,9 +10,14 @@ const nav = [
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">
-      <span class="brand-name">One Handy Katie</span>
-      <span class="brand-tag">Fix • Advise • Manage</span>
+    <a class="brand" href="/" aria-label="One Handy Katie home">
+      <img
+        class="brand-logo"
+        src="/logo/OHK_header_logo.png"
+        alt="One Handy Katie"
+        loading="eager"
+        decoding="async"
+      />
     </a>
 
     <nav aria-label="Primary">
@@ -41,12 +46,19 @@ const nav = [
     gap: 1rem;
     padding: 0.75rem 0;
   }
-  .brand {
-    display: grid;
-    gap: 0.1rem;
+  .brand { display: flex; align-items: center; }
+  .brand-logo {
+    height: 52px;     /* controls header height */
+    width: auto;
+    max-width: 100%;
   }
-  .brand-name { font-weight: 800; }
-  .brand-tag { font-size: 0.9rem; opacity: 0.8; }
+  @media (max-width: 900px) {
+    .brand-logo { height: 44px; }
+  }
+  @media (max-width: 600px) {
+    .brand-logo { height: 36px; }
+  }
+
 
   .nav {
     list-style: none;

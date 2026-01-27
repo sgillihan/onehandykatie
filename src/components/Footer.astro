@@ -1,8 +1,13 @@
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div>
-      <strong>One Handy Katie</strong>
-      <p class="muted">Fix • Advise • Manage</p>
+    <div class="footer-brand">
+      <img
+        src="/logo/OHK_icon_logo.png"
+        alt="One Handy Katie — Fix. Advise. Manage."
+        class="footer-logo"
+        loading="lazy"
+        decoding="async"
+      />
     </div>
 
     <div>
@@ -47,6 +52,16 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1.5rem;
     }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo {
+      height: 64px;   /* adjust if needed */
+      width: auto;
+    }
+
     .muted { opacity: 0.8; margin: 0.5rem 0 0; }
     .copyright { margin-top: 1.25rem; }
     @media (max-width: 900px) {
