@@ -10,6 +10,12 @@ body {
   color: #111;
   background: #fff;
 }
+html { scroll-behavior: smooth; }
+
+h1[id], h2[id], section[id] {
+  scroll-margin-top: 90px; /* adjust if your header is taller */
+}
+
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; }
 a:hover { text-decoration: underline; }
