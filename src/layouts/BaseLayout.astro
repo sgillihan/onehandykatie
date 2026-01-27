@@ -12,6 +12,10 @@ const {
   title = "One Handy Katie",
   description = "Handywoman services, home repair assessments, and construction project management.",
 } = Astro.props;
+
+// Helps with canonical + og:url. Configure site in astro.config for best results.
+const siteUrl = Astro.site?.toString() ?? "https://your-site.netlify.app";
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 ---
 
 <!doctype html>
@@ -19,16 +23,39 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Basic social preview defaults -->
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.svg" />
+
+    <!-- Local SEO: structured data -->
+    <script type="application/ld+json">
+      {JSON.stringify(
+        {
+          "@context": "https://schema.org",
+          "@type": "HomeAndConstructionBusiness",
+          name: "One Handy Katie",
+          telephone: "+1-970-302-8294",
+          areaServed: [
+            { "@type": "AdministrativeArea", name: "Greeley, CO" },
+            { "@type": "AdministrativeArea", name: "Colorado Front Range" },
+          ],
+          url: siteUrl,
+          sameAs: [],
+        },
+        null,
+        2
+      )}
+    </script>
   </head>
 
   <body>

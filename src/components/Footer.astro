@@ -7,19 +7,32 @@
 
     <div>
       <strong>Service Area</strong>
-      <p class="muted">Serving the Greeley, Colorado and Front Range areas.</p>
+      <p class="muted">Greeley, Colorado and the Colorado Front Range area</p>
     </div>
 
     <div>
       <strong>Contact</strong>
       <p class="muted">
+        <a href="tel:19703028294">(970) 302-8294</a><br />
+        <a href="mailto:katie@onehandykatie.com">katie@onehandykatie.com</a><br />
         <a href="/contact">Request an estimate</a>
+      </p>
+    </div>
+
+    <div>
+      <strong>Services</strong>
+      <p class="muted">
+        <a href="/services/#fix">Home repairs</a><br />
+        <a href="/services/#advise">Project advice</a><br />
+        <a href="/services/#manage">Project management</a>
       </p>
     </div>
   </div>
 
   <div class="container copyright">
-    <p class="muted">© {new Date().getFullYear()} One Handy Katie. All rights reserved.</p>
+    <p class="muted">
+      © {new Date().getFullYear()} One Handy Katie. Greeley, CO. All rights reserved.
+    </p>
   </div>
 
   <style>
@@ -31,12 +44,15 @@
     }
     .footer-inner {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1.5rem;
     }
     .muted { opacity: 0.8; margin: 0.5rem 0 0; }
     .copyright { margin-top: 1.25rem; }
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
+      .footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
       .footer-inner { grid-template-columns: 1fr; }
     }
   </style>
