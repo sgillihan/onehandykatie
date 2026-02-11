@@ -1,7 +1,12 @@
 ---
+import { sanity } from "../lib/sanityClient";
+import { siteSettingsQuery } from "../lib/queries";
+
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+const siteSettings = await sanity.fetch(siteSettingsQuery);
 
 type Props = {
   title?: string;
@@ -9,9 +14,18 @@ type Props = {
 };
 
 const {
-  title = "One Handy Katie",
-  description = "Handywoman services, home repair assessments, and construction project management.",
+  title,
+  description,
 } = Astro.props;
+
+const finalTitle =
+  title ?? siteSettings?.defaultSeo?.title ?? "One Handy Katie";
+
+const finalDescription =
+  description ??
+  siteSettings?.defaultSeo?.description ??
+  "Handywoman services, home repair assessments, and construction project management.";
+
 
 // Helps with canonical + og:url. Configure site in astro.config for best results.
 const siteUrl = Astro.site?.toString() ?? "https://your-site.netlify.app";
@@ -24,13 +38,13 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{finalTitle}</title>
+    <meta name="description" content={finalDescription} />
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={finalTitle} />
+    <meta property="og:description" content={finalDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
 
@@ -43,14 +57,19 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
         {
           "@context": "https://schema.org",
           "@type": "HomeAndConstructionBusiness",
-          name: "One Handy Katie",
-          telephone: "+1-970-302-8294",
-          areaServed: [
-            { "@type": "AdministrativeArea", name: "Greeley, CO" },
-            { "@type": "AdministrativeArea", name: "Colorado Front Range" },
-          ],
+          name: siteSettings?.businessName ?? "One Handy Katie",
+          telephone: siteSettings?.phone,
+          email: siteSettings?.email,
+          areaServed: (siteSettings?.serviceArea ?? []).map((name: string) => ({
+            "@type": "AdministrativeArea",
+            name,
+         })),
           url: siteUrl,
-          sameAs: [],
+          sameAs: [
+            siteSettings?.social?.facebook,
+            siteSettings?.social?.instagram,
+            siteSettings?.social?.nextdoor,
+          ].filter(Boolean),
         },
         null,
         2
@@ -59,10 +78,10 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
   </head>
 
   <body>
-    <Header />
+    <Header siteSettings={siteSettings} />
     <main class="container">
       <slot />
     </main>
-    <Footer />
+    <Footer siteSettings={siteSettings} />
   </body>
 </html>

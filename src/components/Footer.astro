@@ -1,9 +1,22 @@
+---
+const { siteSettings } = Astro.props;
+
+// Helpers
+const businessName = siteSettings?.businessName ?? "One Handy Katie";
+const phoneRaw = siteSettings?.phone ?? ""; // can be "(970)..." or "+1..."
+const email = siteSettings?.email ?? "";
+const serviceArea = siteSettings?.serviceArea ?? [];
+
+// Make a tel: link safe-ish even if Katie types punctuation/spaces
+const telHref = phoneRaw ? `tel:${phoneRaw.replace(/[^\d+]/g, "")}` : "";
+---
+
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
       <img
         src="/logo/OHK_icon_logo.png"
-        alt="One Handy Katie — Fix. Advise. Manage."
+        alt={`${businessName} — Fix. Advise. Manage.`}
         class="footer-logo"
         loading="lazy"
         decoding="async"
@@ -12,14 +25,28 @@
 
     <div>
       <strong>Service Area</strong>
-      <p class="muted">Greeley, Colorado and the Colorado Front Range area</p>
+      {serviceArea.length ? (
+        <p class="muted">{serviceArea.join(", ")}</p>
+      ) : (
+        <p class="muted">Greeley, Colorado and the Colorado Front Range area</p>
+      )}
     </div>
 
     <div>
       <strong>Contact</strong>
       <p class="muted">
-        <a href="tel:19703028294">(970) 302-8294</a><br />
-        <a href="mailto:katie@onehandykatie.com">katie@onehandykatie.com</a><br />
+        {phoneRaw ? (
+          <>
+            <a href={telHref}>{phoneRaw}</a><br />
+          </>
+        ) : null}
+
+        {email ? (
+          <>
+            <a href={`mailto:${email}`}>{email}</a><br />
+          </>
+        ) : null}
+
         <a href="/contact">Request an estimate</a>
       </p>
     </div>
@@ -36,7 +63,7 @@
 
   <div class="container copyright">
     <p class="muted">
-      © {new Date().getFullYear()} One Handy Katie. Greeley, CO. All rights reserved.
+      © {new Date().getFullYear()} {businessName}. All rights reserved.
     </p>
   </div>
 
