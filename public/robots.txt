@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://incredible-paprenjak-2d826f.netlify.app/sitemap-index.xml
+Sitemap: https://onehandykatie.com/sitemap-index.xml
