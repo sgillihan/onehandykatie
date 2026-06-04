@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://incredible-paprenjak-2d826f.netlify.app/sitemap-index.xml

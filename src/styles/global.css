@@ -46,6 +46,19 @@ a:hover { text-decoration: underline; }
 }
 .button.primary:hover { opacity: 0.92; }
 h1, h2, h3 { line-height: 1.2; }
+
+/* Visually hidden but readable by screen readers and search engines */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
 .richtext p { margin: 0.75rem 0; }
 .richtext ul, .richtext ol { margin: 0.75rem 0 0.75rem 1.25rem; }
 .richtext li { margin: 0.35rem 0; }

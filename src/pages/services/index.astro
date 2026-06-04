@@ -8,9 +8,11 @@ const data = await sanity.fetch(groq`*[_type == "servicesPage"][0]`);
 ---
 
 <BaseLayout
-  title={`Services | One Handy Katie`}
-  description="Home repairs, project advice, and project management in Greeley, Colorado and the Colorado Front Range."
+  title="Home Repair & Handywoman Services — Greeley, Fort Collins & Loveland CO | One Handy Katie"
+  description="Home repairs, smart home solutions, project advice, and construction management serving Greeley, Fort Collins, Loveland, and the Colorado Front Range. Request a free estimate."
 >
+  <h1 class="page-title">Handywoman Services — Greeley, Fort Collins &amp; Loveland, CO</h1>
+
   <section id="fix" class="section" style="padding-top: 1rem;">
     <h2>{data?.fixTitle ?? "Fix"}</h2>
     {data?.fixBody && <div class="richtext" set:html={renderPT(data.fixBody)} />}
@@ -39,6 +41,13 @@ const data = await sanity.fetch(groq`*[_type == "servicesPage"][0]`);
     </p>
   </section>
   <style>
+    .page-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #555;
+      margin: 1.5rem 0 0;
+      padding: 0;
+    }
     .section-divider {
       border: none;
       border-top: 1px solid #e5e7eb;

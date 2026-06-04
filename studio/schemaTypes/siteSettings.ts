@@ -28,6 +28,18 @@ export default defineType({
     }),
 
     defineField({
+      name: "address",
+      title: "Business Address",
+      type: "object",
+      fields: [
+        defineField({ name: "streetAddress", title: "Street Address", type: "string" }),
+        defineField({ name: "city", title: "City", type: "string", initialValue: "Greeley" }),
+        defineField({ name: "state", title: "State", type: "string", initialValue: "CO" }),
+        defineField({ name: "postalCode", title: "ZIP Code", type: "string" }),
+      ],
+    }),
+
+    defineField({
       name: "social",
       type: "object",
       fields: [

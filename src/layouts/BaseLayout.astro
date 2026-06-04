@@ -52,19 +52,42 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <link rel="icon" type="image/png" href="/logo/OHK_icon_logo.png" />
 
     <!-- Local SEO: structured data -->
-    <script type="application/ld+json">
+    <script type="application/ld+json" is:inline>
       {JSON.stringify(
         {
           "@context": "https://schema.org",
           "@type": "HomeAndConstructionBusiness",
           name: siteSettings?.businessName ?? "One Handy Katie",
+          description: "Handywoman services, home repairs, and construction project management serving Greeley, Fort Collins, Loveland, and the Colorado Front Range.",
           telephone: siteSettings?.phone,
           email: siteSettings?.email,
-          areaServed: (siteSettings?.serviceArea ?? []).map((name: string) => ({
-            "@type": "AdministrativeArea",
-            name,
-         })),
           url: siteUrl,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: siteSettings?.address?.city ?? "Greeley",
+            addressRegion: siteSettings?.address?.state ?? "CO",
+            postalCode: siteSettings?.address?.postalCode,
+            streetAddress: siteSettings?.address?.streetAddress,
+            addressCountry: "US",
+          },
+          areaServed: (
+            (siteSettings?.serviceArea?.length ? siteSettings.serviceArea : [
+              "Greeley, CO",
+              "Fort Collins, CO",
+              "Loveland, CO",
+              "Evans, CO",
+              "Windsor, CO",
+              "Weld County, CO",
+              "Larimer County, CO",
+            ])
+          ).map((name: string) => ({ "@type": "City", name })),
+          knowsAbout: [
+            "home repair",
+            "handywoman services",
+            "construction project management",
+            "home improvement",
+            "smart home installation",
+          ],
           sameAs: [
             siteSettings?.social?.facebook,
             siteSettings?.social?.instagram,

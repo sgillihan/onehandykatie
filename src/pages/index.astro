@@ -3,8 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { sanity } from "../lib/sanityClient";
 import groq from "groq";
 
-const businessName = "One Handy Katie";
-const serviceArea = "Serving Greeley, Colorado and the Colorado Front Range Area";
+const serviceArea = "Serving Greeley, Fort Collins, Loveland, and the Colorado Front Range";
 const phone = "(970) 302-8294"; //update as needed
 
 const gallery = await sanity.fetch(groq`*[_type == "homepageGallery"][0]{
@@ -16,14 +15,14 @@ const gallery = await sanity.fetch(groq`*[_type == "homepageGallery"][0]{
 ---
 
 <BaseLayout
-  title={`${businessName} | Fix. Advise. Manage.`}
-  description="From small home repairs and upgrades to large scale construction project management, One Handy Katie provides reliable, professional services with clear communication and attention to detail. Serving Greeley, Colorado and the Colorado Front Range area."
+  title="Handywoman Services in Greeley, Fort Collins & Loveland CO | One Handy Katie"
+  description="One Handy Katie provides handywoman services, home repairs, and construction project management in Greeley, Fort Collins, and Loveland, CO. 25 years of experience. Request a free estimate."
 >
   <!-- HERO -->
   <section class="hero">
     <div class="hero-grid">
       <div>
-        <h1></h1>
+        <h1 class="sr-only">Handywoman &amp; Home Repair Services in Greeley, Fort Collins &amp; Loveland, CO — One Handy Katie</h1>
         <img
           src="/logo/OHK_primary_logo.png"
           alt="One Handy Katie — Fix. Advise. Manage."
