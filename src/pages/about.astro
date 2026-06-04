@@ -8,21 +8,66 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 >
   <section class="section">
     <h1>About</h1>
-    <p>
-      One Handy Katie provides reliable handywoman services and construction
-      project management for homeowners who want quality work and clear communication.
-    </p>
 
-    <p>
-      Katie Dalby is a longtime Greeley, Colorado resident, and an active member of the community. 
-      Over the course of her 25-year career, she has overseen facilities operations in the healthcare industry, 
-      and has overseen medical building construction projects with >$20 million budgets. Katie has always been 
-      mechanically-minded and enjoys both hands-on work and project management. In 2025, she launched One Handy Katie 
-      to bring her skills and experience to homeowners in the Greeley and Front Range area.
-    </p>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          One Handy Katie provides reliable handywoman services and construction
+          project management for homeowners who want quality work and clear communication.
+        </p>
 
-    <p>
-      Katie Dalby holds a B.S. in Cross-Cultural Studies, an M.A. in Organizational Management and Development, 
-      and certificates in Project Management, Data Analytics, and OSHA Construction. References available upon request.
+        <p>
+          Katie Dalby is a longtime Greeley, Colorado resident, and an active member of the community.
+          Over the course of her 25-year career, she has overseen facilities operations in the healthcare industry,
+          and has overseen medical building construction projects with >$20 million budgets. Katie has always been
+          mechanically-minded and enjoys both hands-on work and project management. In 2025, she launched One Handy Katie
+          to bring her skills and experience to homeowners in the Greeley and Front Range area.
+        </p>
+
+        <p>
+          Katie Dalby holds a B.S. in Cross-Cultural Studies, an M.A. in Organizational Management and Development,
+          and certificates in Project Management, Data Analytics, and OSHA Construction. References available upon request.
+        </p>
+      </div>
+
+      <img
+        src="/images/katie.png"
+        alt="Katie Dalby, owner of One Handy Katie"
+        class="owner-photo"
+        width="400"
+        height="500"
+        loading="eager"
+      />
+    </div>
   </section>
+
+  <style>
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 2rem;
+      align-items: start;
+      margin-top: 1.5rem;
+    }
+    .owner-photo {
+      width: 100%;
+      max-height: 220px;
+      height: auto;
+      border-radius: 0.75rem;
+      object-fit: cover;
+      object-position: top;
+    }
+    .about-text p { margin: 0 0 1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 700px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .owner-photo {
+        max-width: 180px;
+        max-height: 220px;
+      }
+    }
+  </style>
 </BaseLayout>

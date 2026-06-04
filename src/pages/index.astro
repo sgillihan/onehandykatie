@@ -1,9 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { sanity } from "../lib/sanityClient";
+import groq from "groq";
 
 const businessName = "One Handy Katie";
 const serviceArea = "Serving Greeley, Colorado and the Colorado Front Range Area";
 const phone = "(970) 302-8294"; //update as needed
+
+const gallery = await sanity.fetch(groq`*[_type == "homepageGallery"][0]{
+  "photos": photos[]{
+    caption,
+    "imageUrl": image.asset->url
+  }
+}`);
 ---
 
 <BaseLayout
@@ -42,18 +51,18 @@ const phone = "(970) 302-8294"; //update as needed
       <div class="hero-card" aria-label="Quick highlights">
         <h2>How I can help</h2>
         <ul class="checklist">
-          <li><a href="/services/#Fix">Fix- take care of home repairs and other handywoman tasks</a></li>
-          <li><a href="/services/#Advise">Advise- advise you on your home problem or project</a></li>
-          <li><a href="/services/#Manage">Manage- provide full project management services for larger projects</a></li>
+          <li><a href="/services/#fix">Fix- take care of home repairs and other handywoman tasks</a></li>
+          <li><a href="/services/#advise">Advise- advise you on your home problem or project</a></li>
+          <li><a href="/services/#manage">Manage- provide full project management services for larger projects</a></li>
         </ul>
 
         <div class="trust">
           <div class="trust-item">
-            <strong>Experience you can trust</strong>
+            <strong>Experience</strong>
             <span>20 years of construction project management experience, including medical grade construction.</span>
           </div>
           <div class="trust-item">
-            <strong>Quality you can appreciate</strong>
+            <strong>Quality</strong>
             <span>Code & Standards compliance, quality materials, and the right tools for the job.</span>
           </div>
           <div class="trust-item">
@@ -65,31 +74,22 @@ const phone = "(970) 302-8294"; //update as needed
     </div>
   </section>
 
-  <!-- SERVICES PREVIEW -->
-  <section class="section">
-    <div class="section-head">
-      <h2>Services</h2>
-      <p class="muted">Services offered. Click a link for details.</p>
-    </div>
-
-    <div class="cards">
-      <a class="card" href="/services/#Fix">
-        <h3>Fix</h3>
-        <p class="muted">Home repairs, smart home solutions, replacing fixtures, siding repair, and more.</p>
-      </a>
-
-      <a class="card" href="/services/#Advise">
-        <h3>Advise</h3>
-        <p class="muted">Home repair and project advice.</p>
-      </a>
-
-      <a class="card" href="/services/#Manage">
-        <h3>Manage</h3>
-        <p class="muted">Planning, scheduling, and contractor coordination.</p>
-      </a>
-
-    </div>
-
+  <!-- PROJECT GALLERY -->
+  {(gallery?.photos?.length ?? 0) > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <h2>Recent Projects</h2>
+      </div>
+      <div class="gallery-scroll">
+        {gallery.photos.map((p: { imageUrl?: string; caption?: string }) => (
+          <figure class="gallery-thumb">
+            <img src={p.imageUrl} alt={p.caption ?? "Project photo"} loading="lazy" />
+            {p.caption && <figcaption>{p.caption}</figcaption>}
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
 
   <!-- PROCESS -->
   <section class="section">
@@ -165,31 +165,48 @@ const phone = "(970) 302-8294"; //update as needed
       border-top: 1px solid #eaeaea;
     }
     .trust-item span { display: block; font-size: 0.95rem; opacity: 0.8; margin-top: 0.15rem; }
+    .trust-item strong::before {
+      content: "✓ ";
+      color: #2563eb;
+      font-weight: 700;
+    }
 
-    /* SECTION HEAD + CARDS */
+    /* SECTION HEAD */
     .section-head { margin-bottom: 1rem; }
     .section-head h2 { margin: 0 0 0.35rem; }
     .muted { opacity: 0.8; }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* PROJECT GALLERY */
+    .gallery-scroll {
+      display: flex;
       gap: 1rem;
-      margin-top: 1rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      scroll-snap-type: x mandatory;
     }
-    .card {
+    .gallery-scroll::-webkit-scrollbar { height: 6px; }
+    .gallery-scroll::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
+    .gallery-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+    .gallery-thumb {
+      flex: 0 0 240px;
+      scroll-snap-align: start;
+      border-radius: 0.75rem;
+      overflow: hidden;
       border: 1px solid #eee;
-      border-radius: 1rem;
-      padding: 1rem;
       background: white;
-      transition: transform 120ms ease, box-shadow 120ms ease;
+      margin: 0;
     }
-    .card:hover {
-      text-decoration: none;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    .gallery-thumb img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
     }
-    .card h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+    .gallery-thumb figcaption {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      color: #444;
+    }
 
     /* STEPS */
     .steps {
@@ -224,23 +241,11 @@ const phone = "(970) 302-8294"; //update as needed
       gap: 1rem;
     }
 
-    /* Buttons */
-    :global(.button.primary) {
-      background: #111;
-      color: white;
-      border-color: #111;
-    }
-    :global(.button.primary:hover) { opacity: 0.92; }
-
     /* Responsive */
     @media (max-width: 900px) {
       .hero-grid { grid-template-columns: 1fr; }
-      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .steps { grid-template-columns: 1fr; }
       .cta-inner { flex-direction: column; align-items: flex-start; }
-    }
-    @media (max-width: 520px) {
-      .cards { grid-template-columns: 1fr; }
     }
   </style>
 </BaseLayout>

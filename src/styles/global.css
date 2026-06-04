@@ -39,6 +39,12 @@ a:hover { text-decoration: underline; }
   text-decoration: none;
   opacity: 0.9;
 }
+.button.primary {
+  background: #2563eb;
+  color: white;
+  border: 1px solid #111;
+}
+.button.primary:hover { opacity: 0.92; }
 h1, h2, h3 { line-height: 1.2; }
 .richtext p { margin: 0.75rem 0; }
 .richtext ul, .richtext ol { margin: 0.75rem 0 0.75rem 1.25rem; }

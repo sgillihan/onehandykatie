@@ -11,18 +11,15 @@ const data = await sanity.fetch(groq`*[_type == "servicesPage"][0]`);
   title={`Services | One Handy Katie`}
   description="Home repairs, project advice, and project management in Greeley, Colorado and the Colorado Front Range."
 >
-  <section class="section">
-    <h1>{data?.title ?? "Services"}</h1>
-    {data?.intro && <div class="richtext" set:html={renderPT(data.intro)} />}
-  </section>
-
-  <section id="fix" class="section">
+  <section id="fix" class="section" style="padding-top: 1rem;">
     <h2>{data?.fixTitle ?? "Fix"}</h2>
     {data?.fixBody && <div class="richtext" set:html={renderPT(data.fixBody)} />}
     <p style="margin-top: 1.25rem;">
       <a class="button primary" href="/contact">Request an estimate</a>
     </p>
   </section>
+
+  <hr class="section-divider" />
 
   <section id="advise" class="section">
     <h2>{data?.adviseTitle ?? "Advise"}</h2>
@@ -32,6 +29,8 @@ const data = await sanity.fetch(groq`*[_type == "servicesPage"][0]`);
     </p>
   </section>
 
+  <hr class="section-divider" />
+
   <section id="manage" class="section">
     <h2>{data?.manageTitle ?? "Manage"}</h2>
     {data?.manageBody && <div class="richtext" set:html={renderPT(data.manageBody)} />}
@@ -39,4 +38,11 @@ const data = await sanity.fetch(groq`*[_type == "servicesPage"][0]`);
       <a class="button primary" href="/contact">Request an estimate</a>
     </p>
   </section>
+  <style>
+    .section-divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 0;
+    }
+  </style>
 </BaseLayout>
