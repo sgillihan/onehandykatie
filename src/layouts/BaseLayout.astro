@@ -47,6 +47,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <meta property="og:description" content={finalDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${siteUrl}logo/OHK_primary_logo.png`} />
+    <meta property="og:image:alt" content="One Handy Katie — Fix. Advise. Manage." />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Favicons -->
     <link rel="icon" type="image/png" href="/logo/OHK_icon_logo.png" />
