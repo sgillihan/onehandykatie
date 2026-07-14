@@ -1,5 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sanity } from "../../lib/sanityClient";
+import { projectsQuery } from "../../lib/queries";
+import { renderPT } from "../../lib/portableText";
+
+type ProjectPhoto = { caption?: string; imageUrl?: string };
+type Project = { title: string; body?: unknown; photos?: ProjectPhoto[] };
+
+const projects: Project[] = (await sanity.fetch(projectsQuery)) ?? [];
 ---
 
 <BaseLayout
@@ -8,9 +16,64 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 >
   <section class="section">
     <h1>Projects</h1>
-    <p>
-      This page will feature before-and-after photos and brief case studies
-      of completed work.
+    <p class="muted">
+      Before-and-after photos and brief case studies of completed work.
     </p>
   </section>
+
+  {projects.length === 0 && (
+    <section class="section">
+      <p class="muted">Project write-ups are coming soon — check back shortly.</p>
+    </section>
+  )}
+
+  {projects.map((p) => (
+    <article class="section project">
+      <h2>{p.title}</h2>
+
+      {(p.photos?.length ?? 0) > 0 && (
+        <div class="project-photos">
+          {p.photos!.map((photo) => (
+            <figure class="project-photo">
+              <img src={photo.imageUrl} alt={photo.caption ?? p.title} loading="lazy" />
+              {photo.caption && <figcaption>{photo.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+
+      {p.body && <div class="richtext" set:html={renderPT(p.body)} />}
+    </article>
+  ))}
+
+  <style>
+    .muted { opacity: 0.8; }
+    .project { border-top: 1px solid #eee; }
+    .project:first-of-type { border-top: none; }
+    .project h2 { margin: 0 0 1rem; }
+    .project-photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .project-photo {
+      margin: 0;
+      border: 1px solid #eee;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: white;
+    }
+    .project-photo img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .project-photo figcaption {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      color: #444;
+    }
+  </style>
 </BaseLayout>
