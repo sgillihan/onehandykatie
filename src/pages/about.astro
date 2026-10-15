@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import katiePhoto from "../assets/katie.png";
 ---
 
 <BaseLayout
@@ -30,12 +32,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
 
-      <img
-        src="/images/katie.png"
+      <Image
+        src={katiePhoto}
         alt="Katie Dalby, owner of One Handy Katie"
         class="owner-photo"
-        width="400"
-        height="500"
+        width={400}
+        densities={[1, 2]}
         loading="eager"
       />
     </div>

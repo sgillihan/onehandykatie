@@ -11,11 +11,13 @@ const siteSettings = await sanity.fetch(siteSettingsQuery);
 type Props = {
   title?: string;
   description?: string;
+  noindex?: boolean;
 };
 
 const {
   title,
   description,
+  noindex = false,
 } = Astro.props;
 
 const finalTitle =
@@ -30,6 +32,50 @@ const finalDescription =
 // Helps with canonical + og:url. Configure site in astro.config for best results.
 const siteUrl = Astro.site?.toString() ?? "https://your-site.netlify.app";
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+
+// Local SEO: structured data (rendered as JSON-LD in <head>)
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  name: siteSettings?.businessName ?? "One Handy Katie",
+  description: "Handywoman services, home repairs, and construction project management serving Greeley, Fort Collins, Loveland, and the Colorado Front Range.",
+  telephone: siteSettings?.phone,
+  email: siteSettings?.email,
+  url: siteUrl,
+  logo: `${siteUrl}logo/OHK_primary_logo.png`,
+  image: `${siteUrl}logo/OHK_primary_logo.png`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: siteSettings?.address?.city ?? "Greeley",
+    addressRegion: siteSettings?.address?.state ?? "CO",
+    postalCode: siteSettings?.address?.postalCode,
+    streetAddress: siteSettings?.address?.streetAddress,
+    addressCountry: "US",
+  },
+  areaServed: (
+    (siteSettings?.serviceArea?.length ? siteSettings.serviceArea : [
+      "Greeley, CO",
+      "Fort Collins, CO",
+      "Loveland, CO",
+      "Evans, CO",
+      "Windsor, CO",
+      "Weld County, CO",
+      "Larimer County, CO",
+    ])
+  ).map((name: string) => ({ "@type": "City", name })),
+  knowsAbout: [
+    "home repair",
+    "handywoman services",
+    "construction project management",
+    "home improvement",
+    "smart home installation",
+  ],
+  sameAs: [
+    siteSettings?.social?.facebook,
+    siteSettings?.social?.instagram,
+    siteSettings?.social?.nextdoor,
+  ].filter(Boolean),
+};
 ---
 
 <!doctype html>
@@ -41,6 +87,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <title>{finalTitle}</title>
     <meta name="description" content={finalDescription} />
     <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex" />}
 
     <!-- Open Graph -->
     <meta property="og:title" content={finalTitle} />
@@ -55,52 +102,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <link rel="icon" type="image/png" href="/logo/OHK_icon_logo.png" />
 
     <!-- Local SEO: structured data -->
-    <script type="application/ld+json" is:inline>
-      {JSON.stringify(
-        {
-          "@context": "https://schema.org",
-          "@type": "HomeAndConstructionBusiness",
-          name: siteSettings?.businessName ?? "One Handy Katie",
-          description: "Handywoman services, home repairs, and construction project management serving Greeley, Fort Collins, Loveland, and the Colorado Front Range.",
-          telephone: siteSettings?.phone,
-          email: siteSettings?.email,
-          url: siteUrl,
-          address: {
-            "@type": "PostalAddress",
-            addressLocality: siteSettings?.address?.city ?? "Greeley",
-            addressRegion: siteSettings?.address?.state ?? "CO",
-            postalCode: siteSettings?.address?.postalCode,
-            streetAddress: siteSettings?.address?.streetAddress,
-            addressCountry: "US",
-          },
-          areaServed: (
-            (siteSettings?.serviceArea?.length ? siteSettings.serviceArea : [
-              "Greeley, CO",
-              "Fort Collins, CO",
-              "Loveland, CO",
-              "Evans, CO",
-              "Windsor, CO",
-              "Weld County, CO",
-              "Larimer County, CO",
-            ])
-          ).map((name: string) => ({ "@type": "City", name })),
-          knowsAbout: [
-            "home repair",
-            "handywoman services",
-            "construction project management",
-            "home improvement",
-            "smart home installation",
-          ],
-          sameAs: [
-            siteSettings?.social?.facebook,
-            siteSettings?.social?.instagram,
-            siteSettings?.social?.nextdoor,
-          ].filter(Boolean),
-        },
-        null,
-        2
-      )}
-    </script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(structuredData)} />
   </head>
 
   <body>

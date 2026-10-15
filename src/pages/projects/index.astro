@@ -35,7 +35,13 @@ const projects: Project[] = (await sanity.fetch(projectsQuery)) ?? [];
         <div class="project-photos">
           {p.photos!.map((photo) => (
             <figure class="project-photo">
-              <img src={photo.imageUrl} alt={photo.caption ?? p.title} loading="lazy" />
+              <img
+                src={`${photo.imageUrl}?w=1200&auto=format&q=80`}
+                srcset={`${photo.imageUrl}?w=600&auto=format&q=80 600w, ${photo.imageUrl}?w=1200&auto=format&q=80 1200w`}
+                sizes="(max-width: 700px) 100vw, 600px"
+                alt={photo.caption ?? p.title}
+                loading="lazy"
+              />
               {photo.caption && <figcaption>{photo.caption}</figcaption>}
             </figure>
           ))}
