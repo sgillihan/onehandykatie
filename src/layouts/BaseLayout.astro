@@ -66,10 +66,12 @@ const structuredData = {
   knowsAbout: [
     "home repair",
     "handywoman services",
+    "handyman services",
     "construction project management",
     "home improvement",
     "smart home installation",
   ],
+  keywords: "handywoman, handyman, home repair, construction project management, Greeley, Fort Collins, Loveland",
   sameAs: [
     siteSettings?.social?.facebook,
     siteSettings?.social?.instagram,
@@ -86,6 +88,7 @@ const structuredData = {
 
     <title>{finalTitle}</title>
     <meta name="description" content={finalDescription} />
+    <meta name="keywords" content="handywoman, handyman, home repair, handyman services, construction project management, Greeley, Fort Collins, Loveland" />
     <link rel="canonical" href={canonicalUrl} />
     {noindex && <meta name="robots" content="noindex" />}
 
